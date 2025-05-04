@@ -326,3 +326,77 @@
       margin-top: 10px;
       width: 100%;
     }
+/* --- Subtask Feature Styles --- */
+
+/* Style for the toggle icon */
+.toggle-subtasks {
+  cursor: pointer;
+  padding: 0 8px 0 0; /* Adjust spacing */
+  transition: transform 0.2s ease-in-out;
+  color: #555; /* Example color */
+  font-size: 0.9em; /* Slightly smaller than task text */
+  vertical-align: middle; /* Align with text */
+}
+
+/* Nested list for subtasks */
+.subtask-list {
+  list-style: none;
+  padding-left: 25px; /* Indentation */
+  margin-left: 10px; /* Further align with parent text */
+  margin-top: 8px;  /* Space below parent task content */
+  border-left: 2px solid #e0e0e0; /* Visual indicator for nesting */
+  display: none; /* Hidden by default */
+}
+
+/* Style for individual subtask items */
+.subtask-item {
+  /* Optionally add slightly different background or border */
+  /* background-color: #f9f9f9; */
+  font-size: 0.95rem; /* Slightly smaller font */
+  margin-left: 5px; /* Align subtask content */
+  /* Subtasks are not draggable in this implementation */
+  cursor: default;
+}
+
+/* Show subtask list and rotate icon when parent is expanded */
+.task-item.expanded > .subtask-list {
+  display: block;
+}
+
+.task-item.expanded > .task-content .toggle-subtasks {
+  transform: rotate(90deg);
+}
+
+/* Style for the Add Subtask button */
+.add-subtask-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #667eea; /* Indigo variant */
+  font-size: 1rem;
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.add-subtask-button:hover {
+  color: var(--button-hover-bg); /* Use existing hover color */
+}
+
+/* Style for inline edit input */
+.edit-task-input {
+    padding: 2px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: inherit; /* Match surrounding text size */
+    font-family: inherit;
+    margin-left: 5px; /* Adjust spacing if needed */
+}
+
+/* Hide original text span when input is shown (handled by JS replacement) */
+
+/* Adjust spacing for items with toggles */
+.has-subtasks .task-content .task-checkbox {
+    margin-left: 0; /* Adjust if needed based on toggle icon size */
+}
+
+/* --- End Subtask Feature Styles --- */
