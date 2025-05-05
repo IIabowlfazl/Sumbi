@@ -205,13 +205,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Render all tasks
-  function renderTasks() {
-    taskList.innerHTML = ''; // Clear existing list
-    tasks.forEach((task) => { // Only iterate through main tasks
-      taskList.appendChild(createTaskElement(task));
-    });
-    saveTasks(); // Save state after every render
-  }
+ function renderTasks() {
+  taskList.innerHTML = ''; // Clear existing list
+
+  console.log("Rendering tasks. Current tasks data:", tasks); // <-- ADD THIS LINE
+
+  tasks.forEach((task) => { // Only iterate through main tasks
+    taskList.appendChild(createTaskElement(task));
+  });
+
+  saveTasks(); // Save state after every render
+}
 
   // Create HTML element for a single task or subtask
   function createTaskElement(task, parentId = null) {
