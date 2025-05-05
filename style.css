@@ -330,73 +330,53 @@
 
 /* Style for the toggle icon */
 .toggle-subtasks {
-  cursor: pointer;
-  padding: 0 8px 0 0; /* Adjust spacing */
-  transition: transform 0.2s ease-in-out;
-  color: #555; /* Example color */
-  font-size: 0.9em; /* Slightly smaller than task text */
-  vertical-align: middle; /* Align with text */
+  /* ... (keep existing styles) ... */
+  vertical-align: baseline; /* Try aligning icon better with text line */
+  margin-right: 4px; /* Adjust space */
 }
 
 /* Nested list for subtasks */
 .subtask-list {
   list-style: none;
-  padding-left: 25px; /* Indentation */
-  margin-left: 10px; /* Further align with parent text */
-  margin-top: 8px;  /* Space below parent task content */
-  border-left: 2px solid #e0e0e0; /* Visual indicator for nesting */
-  display: none; /* Hidden by default */
+  padding-left: 15px; /* ADJUST: Increase padding for more indentation */
+  margin-left: 25px; /* ADJUST: Add margin to align with parent text, adjust as needed */
+  margin-top: 8px;
+  border-left: 2px solid #e0e0e0;
+  display: none;
+  /* ADD: Space below the list before next main task */
+  margin-bottom: 10px;
+  /* ADD: Prevent main task background bleeding through if transparent */
+  position: relative;
 }
 
 /* Style for individual subtask items */
 .subtask-item {
-  /* Optionally add slightly different background or border */
-  /* background-color: #f9f9f9; */
-  font-size: 0.95rem; /* Slightly smaller font */
-  margin-left: 5px; /* Align subtask content */
-  /* Subtasks are not draggable in this implementation */
+  background-color: #f8f9fa; /* ADD: Slightly different background */
+  font-size: 0.95rem;
+  /* margin-left: 5px; REMOVE or adjust this if using padding on subtask-list */
   cursor: default;
+  padding: 8px 12px; /* ADJUST padding inside subtask */
+  margin-bottom: 6px; /* ADD space between subtasks */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06); /* Optional: softer shadow */
 }
 
-/* Show subtask list and rotate icon when parent is expanded */
-.task-item.expanded > .subtask-list {
-  display: block;
+/* Ensure subtask content aligns nicely */
+.subtask-item .task-content {
+  /* Adjust alignment if needed, gap might be inherited */
+  gap: 8px; /* Example: Slightly smaller gap */
 }
 
-.task-item.expanded > .task-content .toggle-subtasks {
-  transform: rotate(90deg);
+/* Optional: Adjust subtask checkbox size or margin */
+.subtask-item .task-checkbox {
+  width: 16px;
+  height: 16px;
 }
 
-/* Style for the Add Subtask button */
-.add-subtask-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #667eea; /* Indigo variant */
-  font-size: 1rem;
-  padding: 5px;
-  transition: color 0.3s ease;
+/* Optional: Adjust subtask action button size */
+.subtask-item .task-actions button {
+    font-size: 0.9rem;
+    padding: 4px;
 }
 
-.add-subtask-button:hover {
-  color: var(--button-hover-bg); /* Use existing hover color */
-}
-
-/* Style for inline edit input */
-.edit-task-input {
-    padding: 2px 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: inherit; /* Match surrounding text size */
-    font-family: inherit;
-    margin-left: 5px; /* Adjust spacing if needed */
-}
-
-/* Hide original text span when input is shown (handled by JS replacement) */
-
-/* Adjust spacing for items with toggles */
-.has-subtasks .task-content .task-checkbox {
-    margin-left: 0; /* Adjust if needed based on toggle icon size */
-}
-
+/* --- (Keep other existing subtask styles like .expanded, .add-subtask-button, etc.) --- */
 /* --- End Subtask Feature Styles --- */
