@@ -330,17 +330,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Event Handlers for Task Actions
-  function handleToggleSubtasks(event) {
+ function handleToggleSubtasks(event) {
+    console.log("Toggle clicked!"); // <-- Log: Check if function is entered
     const taskItem = event.target.closest('.task-item');
+    if (!taskItem) {
+         console.error("Could not find parent task item for toggle."); // <-- Log: Error if parent <li> not found
+         return;
+    }
     const taskId = parseInt(taskItem.dataset.id, 10);
-    const { task } = findTaskById(taskId); // Find main task
+    console.log("Task ID:", taskId); // <-- Log: Check if Task ID is read correctly
+
+    const { task } = findTaskById(taskId);
+    console.log("Found task object:", task); // <-- Log: Check if task object is found
 
     if (task) {
-      task.isExpanded = !task.isExpanded;
-      taskItem.classList.toggle('expanded');
-      saveTasks(); // Persist the expanded state
+        task.isExpanded = !task.isExpanded;
+        console.log("Toggled isExpanded to:", task.isExpanded); // <-- Log: Check new expanded state
+        taskItem.classList.toggle('expanded');
+        console.log("Toggled 'expanded' class on element."); // <-- Log: Confirm class toggle happened
+        saveTasks(); // Persist the state
+    } else {
+         console.error("Task object not found for ID:", taskId); // <-- Log: Error if task data not found
     }
-  }
+}
 
   function handleAddSubtask(event) {
     const taskItem = event.target.closest('.task-item');
