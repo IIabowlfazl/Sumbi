@@ -377,29 +377,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleDeleteTask(event) {
-    const taskItem = event.target.closest('.task-item');
-    const id = parseInt(taskItem.dataset.id, 10);
-    const parentId = taskItem.dataset.parentId ? parseInt(taskItem.dataset.parentId, 10) : null;
-    const { task, parentTask } = findTaskById(id, parentId);
+    
+  const taskItem = event.target.closest('.task-item');
+  const id = parseInt(taskItem.dataset.id, 10);
+  const parentId = taskItem.dataset.parentId ? parseInt(taskItem.dataset.parentId, 10) : null;
+  const { task, parentTask } = findTaskById(id, parentId);
 
-    if (!task) return; // Should not happen if element exists
+  // Keep this check to prevent errors if task somehow doesn't exist
+  if (task) {
+      // --- Confirmation Removed ---
+      // The code that was inside the confirm() check now runs directly
 
-    let confirmMessage = "Are you sure you want to delete this task?";
-    if (parentId === null && task.subtasks && task.subtasks.length > 0) {
-      confirmMessage = "Are you sure you want to delete this main task and ALL its subtasks?";
-    }
-
-    if (confirm(confirmMessage)) {
       if (parentId !== null && parentTask) {
-        // Delete subtask
-        parentTask.subtasks = parentTask.subtasks.filter(sub => sub.id !== id);
+          // Delete subtask
+          parentTask.subtasks = parentTask.subtasks.filter(sub => sub.id !== id);
       } else {
-        // Delete main task
-        tasks = tasks.filter(t => t.id !== id);
+          // Delete main task (and its subtasks are implicitly gone)
+          tasks = tasks.filter(t => t.id !== id);
       }
       renderTasks(); // Re-render after deletion
-    }
+      // --- End of Removed Confirmation Block ---
   }
+}
 
   function handleInitiateEdit(event) {
     const taskItem = event.target.closest('.task-item');
