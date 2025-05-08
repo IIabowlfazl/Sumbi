@@ -253,7 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const toggleIcon = document.createElement('i');
       toggleIcon.classList.add('fas', 'fa-caret-right', 'toggle-subtasks');
-      toggleIcon.addEventListener('click', handleToggleSubtasks);
+      // toggleIcon.addEventListener('click', handleToggleSubtasks); // Comment out the original
+    toggleIcon.addEventListener('click', function(event) {
+        console.log("Inline anonymous function: Triangle icon was clicked!");
+        alert("Triangle Clicked!"); // Add an alert for very obvious feedback
+        // Optionally, you can still try to call the main handler here to see if IT has an issue
+        // handleToggleSubtasks(event);
+    });
       taskContent.appendChild(toggleIcon);
     }
 
