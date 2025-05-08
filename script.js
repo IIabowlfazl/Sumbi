@@ -253,13 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const toggleIcon = document.createElement('i');
       toggleIcon.classList.add('fas', 'fa-caret-right', 'toggle-subtasks');
-      // toggleIcon.addEventListener('click', handleToggleSubtasks); // Comment out the original
-    toggleIcon.addEventListener('click', function(event) {
-        console.log("Inline anonymous function: Triangle icon was clicked!");
-        alert("Triangle Clicked!"); // Add an alert for very obvious feedback
-        // Optionally, you can still try to call the main handler here to see if IT has an issue
-        // handleToggleSubtasks(event);
-    });
+    toggleIcon.addEventListener('click', handleToggleSubtasks);
       taskContent.appendChild(toggleIcon);
     }
 
@@ -336,27 +330,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Event Handlers for Task Actions
- function handleToggleSubtasks(event) {
-    console.log("Toggle clicked!"); // <-- Log: Check if function is entered
+function handleToggleSubtasks(event) {
+    console.log("handleToggleSubtasks: Function entered."); // Changed message slightly for clarity
     const taskItem = event.target.closest('.task-item');
     if (!taskItem) {
-         console.error("Could not find parent task item for toggle."); // <-- Log: Error if parent <li> not found
+         console.error("handleToggleSubtasks: Could not find parent task item for toggle.");
          return;
     }
     const taskId = parseInt(taskItem.dataset.id, 10);
-    console.log("Task ID:", taskId); // <-- Log: Check if Task ID is read correctly
+    console.log("handleToggleSubtasks: Task ID:", taskId);
 
-    const { task } = findTaskById(taskId);
-    console.log("Found task object:", task); // <-- Log: Check if task object is found
+    const { task } = findTaskById(taskId); // Assuming findTaskById works for main tasks
+    console.log("handleToggleSubtasks: Found task object:", task);
 
     if (task) {
         task.isExpanded = !task.isExpanded;
-        console.log("Toggled isExpanded to:", task.isExpanded); // <-- Log: Check new expanded state
+        console.log("handleToggleSubtasks: Toggled isExpanded to:", task.isExpanded);
         taskItem.classList.toggle('expanded');
-        console.log("Toggled 'expanded' class on element."); // <-- Log: Confirm class toggle happened
-        saveTasks(); // Persist the state
+        console.log("handleToggleSubtasks: Toggled 'expanded' class on element.");
+        saveTasks();
     } else {
-         console.error("Task object not found for ID:", taskId); // <-- Log: Error if task data not found
+         console.error("handleToggleSubtasks: Task object not found for ID:", taskId);
     }
 }
 
